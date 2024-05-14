@@ -5,9 +5,8 @@ function db() {
 
   async function createInstance() {
     console.log('Connecting to db...');
-    console.log(process.env.MONGO_URL);
     let db = await mongoose.connect(process.env.MONGO_URL);
-    console.log('Connected', db);
+    console.log('Connected');
     return db;
   }
 
