@@ -11,6 +11,15 @@ db.buildInstance().then(() => {
     res.send('Flow created');
   })
 
+  app.get('/usage', async (req, res) => {
+    try {
+      const registros = await actions.lastData()
+      res.json(registros);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   app.listen(port, () => {
     console.log(`Flowsensor API listening on port ${port}`);
   })
