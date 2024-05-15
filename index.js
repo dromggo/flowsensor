@@ -12,6 +12,7 @@ db.buildInstance().then(() => {
   })
 
   app.get('/dashboard', async (req, res) => {
+    console.log('dashboard');
     try {
       const usage = actions.lastData();
       res.render('dashboard', { usage });
