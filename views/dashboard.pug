@@ -15,6 +15,6 @@ html
       tbody
         each usage in usages
           tr
-            td= consumo.value
-            td= consumo.deviceId
-            td= consumo.createdAt.toISOString().substring(0, 10) + ' ' + consumo.createdAt.toISOString().substring(11, 19)
+            td= usage.value
+            td= usage.deviceId
+            td= usage.createdAt.toISOString().substring(0, 10) + ' ' + usage.createdAt.toISOString().substring(11, 19)
