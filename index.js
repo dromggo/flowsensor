@@ -14,8 +14,8 @@ db.buildInstance().then(() => {
   app.get('/dashboard', async (req, res) => {
     console.log('dashboard');
     try {
-      const usage = actions.lastData();
-      res.render('dashboard', { usage });
+      const usages = actions.lastData();
+      res.render('dashboard', { usages });
     } catch (err) {
       res.status(500).send('Error retrieving data');
     }
