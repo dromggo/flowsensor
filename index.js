@@ -11,12 +11,12 @@ db.buildInstance().then(() => {
     res.send('Flow created');
   })
 
-  app.get('/usage', async (req, res) => {
+  app.get('/dashboard', async (req, res) => {
     try {
-      const registros = await actions.lastData()
-      res.json(registros);
+      const usage = actions.lastData();
+      res.render('dashboard', { usage });
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      res.status(500).send('Error retrieving data');
     }
   });
 
