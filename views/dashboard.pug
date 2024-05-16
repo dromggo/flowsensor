@@ -95,7 +95,7 @@ html
       });
 
       const updateLineTrendChart = async () => {
-        const response = await axios.get('/api/latest-consumption');
+        const response = await axios.get('/api/latest');
         const latestConsumos = response.data.reverse(); // Revertir para que estén en orden cronológico
         const labels = latestConsumos.map(consumo => consumo.createdAt.substring(11, 19));
         const data = latestConsumos.map(consumo => consumo.value);
