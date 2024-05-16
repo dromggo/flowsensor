@@ -17,6 +17,7 @@ db.buildInstance().then(() => {
       const usages = actions.lastData();
       res.render('dashboard', { usages });
     } catch (err) {
+      console.log(err);
       res.status(500).send('Error retrieving data');
     }
   });
