@@ -19,7 +19,8 @@ db.buildInstance().then(() => {
       res.render('dashboard', { 
         usages,
         dates: tendency.dates,
-        dailyConsumption: tendency.dailyConsumption
+        dailyConsumption: tendency.dailyConsumption,
+        hourlyConsumption: tendency.hourlyConsumption
       });
     } catch (err) {
       console.log(err);
