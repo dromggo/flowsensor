@@ -20,7 +20,7 @@ html
               tr
                 td= usage.value
                 td= usage.deviceId
-                td= usage.createdAt.toISOString().substring(0, 10) + ' ' + consumo.createdAt.toISOString().substring(11, 19)
+                td= usage.createdAt.toISOString().substring(0, 10) + ' ' + usage.createdAt.toISOString().substring(11, 19)
       .right
         canvas#trendChart(width="400" height="400")
         canvas#hourlyChart(width="400" height="400")
