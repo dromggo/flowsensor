@@ -15,7 +15,9 @@ db.buildInstance().then(() => {
     console.log('dashboard');
     try {
       const usages = await actions.lastData();
-      res.render('dashboard', { usages });
+      const dailyConsumption = await actions.flowTendency();
+      const dates = Object.keys(dailyConsumptionMap);
+      res.render('dashboard', { usages, dates, dailyConsumption });
     } catch (err) {
       console.log(err);
       res.status(500).send('Error retrieving data');

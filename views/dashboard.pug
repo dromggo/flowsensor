@@ -2,19 +2,46 @@ doctype html
 html
   head
     title Dashboard
-    link(rel="stylesheet", href="/dashboard.css")
+    link(rel="stylesheet", href="/styles.css")
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
   body
     h1 Dashboard
     h2 Últimos 20 datos crudos
-    table
-      thead
-        tr
-          th Consumo (L/min)
-          th Device ID
-          th Fecha de Creación
-      tbody
-        each usage in usages
-          tr
-            td= usage.value
-            td= usage.deviceId
-            td= usage.createdAt
+    .container
+      .left
+        table
+          thead
+            tr
+              th Consumo (L/min)
+              th Device ID
+              th Fecha de Creación
+          tbody
+            each usage in usages
+              tr
+                td= usage.value
+                td= usage.deviceId
+                td= usage.createdAt
+      .right
+        canvas#trendChart(width="400" height="400")
+    script.
+      const ctx = document.getElementById('trendChart').getContext('2d');
+      const trendChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: !{JSON.stringify(dates)},
+          datasets: [{
+            label: 'Consumo Diario (L/min)',
+            data: !{JSON.stringify(dailyConsumption)},
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
