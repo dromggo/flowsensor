@@ -16,7 +16,7 @@ db.buildInstance().then(() => {
     try {
       const usages = await actions.lastData();
       const tendency = await actions.flowTendency();
-      const dates = Object.keys(tendency.dailyConsumptionMap);
+      const dates = Object.keys(tendency.dailyConsumptionMap).sort();
       res.render('dashboard', { 
         usages,
         dates,
