@@ -14,7 +14,7 @@ db.buildInstance().then(() => {
   app.get('/dashboard', async (req, res) => {
     console.log('dashboard');
     try {
-      const usages = actions.lastData();
+      const usages = await actions.lastData();
       res.render('dashboard', { usages });
     } catch (err) {
       console.log(err);
