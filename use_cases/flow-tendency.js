@@ -13,7 +13,10 @@ async function flowTendency () {
   });
 
   const dates = Object.keys(dailyConsumptionMap);
-  return dates.map(date => dailyConsumptionMap[date]);
+  return {
+    dailyConsumption: dates.map(date => dailyConsumptionMap[date]),
+    dailyConsumptionMap
+  }
 }
 
 module.exports = flowTendency;
