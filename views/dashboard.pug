@@ -8,9 +8,12 @@ html
   body
     h1 Dashboard
     .charts-container
-      canvas#trendChart
-      canvas#hourlyChart
-      canvas#lineTrendChart
+      .chart-wrapper
+        canvas#trendChart
+      .chart-wrapper
+        canvas#hourlyChart
+      .chart-wrapper
+        canvas#lineTrendChart
     h2 Últimos 20 datos crudos
     .table-container
       table
@@ -22,9 +25,9 @@ html
         tbody
           each usage in usages
             tr
-              td= usage.value
-              td= usage.deviceId
-              td= usage.createdAt.toISOString().substring(0, 10) + ' ' + usage.createdAt.toISOString().substring(11, 19)
+              td= usages.value
+              td= usages.deviceId
+              td= usages.createdAt.toISOString().substring(0, 10) + ' ' + usages.createdAt.toISOString().substring(11, 19)
     script.
       const ctxTrend = document.getElementById('trendChart').getContext('2d');
       const trendChart = new Chart(ctxTrend, {
@@ -40,6 +43,8 @@ html
           }]
         },
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               beginAtZero: true
@@ -62,6 +67,8 @@ html
           }]
         },
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               beginAtZero: true
@@ -84,6 +91,8 @@ html
           }]
         },
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               beginAtZero: true

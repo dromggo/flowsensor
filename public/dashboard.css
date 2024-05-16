@@ -12,7 +12,15 @@ h1, h2 {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 20px;
+}
+
+.chart-wrapper {
+  flex: 1 1 300px;
+  max-width: 300px;
+  position: relative;
+  height: 300px;
 }
 
 .table-container {
@@ -33,9 +41,4 @@ th, td {
 
 th {
   background-color: #f4f4f4;
-}
-
-canvas {
-  max-width: 300px;
-  height: auto;
 }
