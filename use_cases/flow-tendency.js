@@ -8,13 +8,14 @@ async function flowTendency () {
   (await Flow.find({ createdAt: { $gte: tenDaysAgo } })).forEach(consumo => {
     const date = consumo.createdAt.toISOString().substring(0, 10);
     if (!dailyConsumptionMap[date]) {
-      dailyConsumptionMap[date] = 0;
+      dailyConsumptionMap[date] = { total: 0, count: 0 };
     }
-    dailyConsumptionMap[date] += consumo.value;
+    dailyConsumptionMap[date].total += consumo.value;
+    dailyConsumptionMap[date].count += 1;
   });
 
   return {
-    dailyConsumption: dates.map(date => dailyConsumptionMap[date]),
+    dailyConsumption: dates.map(date => (dailyConsumptionMap[date].total / dailyConsumptionMap[date].count).toFixed(2)),
     dailyConsumptionMap
   }
 }
