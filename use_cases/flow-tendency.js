@@ -10,7 +10,8 @@ async function flowTendency () {
     if (!dailyConsumptionMap[date]) {
       dailyConsumptionMap[date] = 0;
     }
-    dailyConsumptionMap[date] += consumo.value;
+    dailyConsumptionMap[date].total += consumo.value;
+    dailyConsumptionMap[date].count += 1;
   });
 
   const dates = Object.keys(dailyConsumptionMap).sort();
