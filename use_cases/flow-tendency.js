@@ -15,7 +15,7 @@ async function flowTendency () {
 
   const dates = Object.keys(dailyConsumptionMap).sort();
   return {
-    dailyConsumption: dates.map(date => (dailyConsumptionMap[date].total / dailyConsumptionMap[date].count).toFixed(2));,
+    dailyConsumption: dates.map(date => (dailyConsumptionMap[date].total / dailyConsumptionMap[date].count).toFixed(2)),
     dates
   }
 }
