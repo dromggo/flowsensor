@@ -28,6 +28,11 @@ db.buildInstance().then(() => {
     }
   });
 
+  app.get('/api/latest', async (req, res) => {
+    const latestConsumption = await actions.latest()
+    res.json(latestConsumption);
+  });
+
   app.listen(port, () => {
     console.log(`Flowsensor API listening on port ${port}`);
   })

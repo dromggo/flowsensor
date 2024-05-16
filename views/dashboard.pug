@@ -4,6 +4,7 @@ html
     title Dashboard
     link(rel="stylesheet", href="/dashboard.css")
     script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
   body
     h1 Dashboard
     h2 Últimos 20 datos crudos
@@ -24,6 +25,8 @@ html
       .right
         canvas#trendChart(width="400" height="400")
         canvas#hourlyChart(width="400" height="400")
+    h2 Línea de tendencia de los últimos 50 datos de flujo
+    canvas#lineTrendChart(width="400" height="200")
     script.
       const ctx = document.getElementById('trendChart').getContext('2d');
       const trendChart = new Chart(ctx, {
@@ -68,3 +71,39 @@ html
           }
         }
       });
+
+      const ctxLineTrend = document.getElementById('lineTrendChart').getContext('2d');
+      const lineTrendChart = new Chart(ctxLineTrend, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'Últimos 50 Datos de Flujo (L/min)',
+            data: [],
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      const updateLineTrendChart = async () => {
+        const response = await axios.get('/api/latest-consumption');
+        const latestConsumos = response.data.reverse(); // Revertir para que estén en orden cronológico
+        const labels = latestConsumos.map(consumo => consumo.createdAt.substring(11, 19));
+        const data = latestConsumos.map(consumo => consumo.value);
+
+        lineTrendChart.data.labels = labels;
+        lineTrendChart.data.datasets[0].data = data;
+        lineTrendChart.update();
+      };
+
+      setInterval(updateLineTrendChart, 3000); // Actualizar cada 3 segundos
+      updateLineTrendChart(); // Llamar inmediatamente para cargar datos al inicio
